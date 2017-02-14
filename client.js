@@ -1,6 +1,19 @@
 $(document).ready(function () {
-  // var personArray = [{name: 'Christine', yearsOfExperience: 4 }, {name: 'Chad', yearsOfExperience: 10}];
+  var personArray = [{name: 'Christine', yearsOfExperience: 4 }, {name: 'Chad', yearsOfExperience: 10}];
   var sum = 0;
+
+  personArray.forEach(function (person) {
+    sum += person.yearsOfExperience;
+
+  $('#personTableBody').append(
+    '<tr>' +
+          '<td>' + person.name + '</td>' +
+          '<td>' + person.yearsOfExperience + '</td>' +
+          '</tr>'
+        );
+        $('#yearsOfLukesTime').text(sum);
+      });
+
   $('form').on('submit', function(event){ // event listener on submitNewEmployee
     // declaring variables and retrieving values from input boxes
     event.preventDefault();
@@ -15,6 +28,7 @@ $(document).ready(function () {
     });
 
     sum = parseFloat(sum) + parseFloat(newEmployeeObject.yearsOfExperience);
+
 
     $('#personTableBody').append(
       '<tr>' +
