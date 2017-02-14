@@ -1,64 +1,29 @@
 $(document).ready(function () {
-  var personArray = [{name: 'Christine', yearsOfExperience: 4 }, {name: 'Chad', yearsOfExperience: 10}];
-
-  $('#submitNewEmployee').on('click', function(){ // event listener on submitNewEmployee
+  // var personArray = [{name: 'Christine', yearsOfExperience: 4 }, {name: 'Chad', yearsOfExperience: 10}];
+  var sum = 0;
+  $('form').on('submit', function(event){ // event listener on submitNewEmployee
     // declaring variables and retrieving values from input boxes
-    var name = $('#name').val();
-    var yearsOfExperience = parseInt($('#yearsOfExperience').val());
-    personArray.push({name: name, yearsOfExperience: yearsOfExperience});
+    event.preventDefault();
 
-    var sum = 0;
-    personArray.forEach(function (person) {
+    var submissionArray = $(this).serializeArray();
+    var newEmployeeObject = {};
+    // console.log(sum);
 
-      sum += person.yearsOfExperience;
-
-      $('#personTableBody').append(
-        '<tr>' +
-        '<td>' + person.name + '</td>' +
-        '<td>' + person.yearsOfExperience + '</td>' +
-        '</tr>'
-      );
+    submissionArray.forEach(function(inputFieldObject){
+      newEmployeeObject[inputFieldObject.name] = inputFieldObject.value;
 
     });
-    console.log(sum);
+
+    sum = parseFloat(sum) + parseFloat(newEmployeeObject.yearsOfExperience);
+
+    $('#personTableBody').append(
+      '<tr>' +
+      '<td>' + newEmployeeObject.name + '</td>' +
+      '<td>' + newEmployeeObject.yearsOfExperience + '</td>' +
+      '</tr>'
+    );
+
     $('#yearsOfLukesTime').text(sum);
-    // var sum = 0;
-    // personArray.forEach(function (person) {
-    //
-    //     sum += person.yearsOfExperience;
-    //
-    //     $('#personTableBody').append(
-    //         '<tr>' +
-    //           '<td>' + person.name + '</td>' +
-    //           '<td>' + person.yearsOfExperience + '</td>' +
-    //         '</tr>'
-    //       );
-    //     var totalYearsOfExperience = sum;
-    // $('#yearsOfExperience').text(sum);
   });
-
-
-
-
-
-  // personArray.forEach(function(person, years){
-  //   console.log(person.yearsOfExperience);
-  // });
-
-  // var sum = 0;
-  // personArray.forEach(function (person) {
-  //
-  //     sum += person.yearsOfExperience;
-  //
-  //     $('#personTableBody').append(
-  //         '<tr>' +
-  //           '<td>' + person.name + '</td>' +
-  //           '<td>' + person.yearsOfExperience + '</td>' +
-  //         '</tr>'
-  //       );
-  // $('#yearsOfExperience').text(sum);
-  //   });
-
-  // });
 
 });
