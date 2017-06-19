@@ -20,17 +20,19 @@ $(document).ready(function () {
 
     var submissionArray = $(this).serializeArray();
     var newEmployeeObject = {};
-    // console.log(sum);
+  
+    submissionArray.forEach(function(newPerson){
+      newEmployeeObject[newPerson.name] = newPerson.value;
 
-    submissionArray.forEach(function(inputFieldObject){
-      newEmployeeObject[inputFieldObject.name] = inputFieldObject.value;
+      document.getElementById('form').reset(); // resets form inputs upon submit
 
     });
 
-    sum = parseFloat(sum) + parseFloat(newEmployeeObject.yearsOfExperience);
+    sum = parseFloat(sum) + parseFloat(newEmployeeObject.yearsOfExperience);  // converts a string to a number value
+    
 
 
-    $('#personTableBody').append(
+    $('#personTableBody').append( // appends the name and years of experience to the table
       '<tr>' +
       '<td>' + newEmployeeObject.name + '</td>' +
       '<td>' + newEmployeeObject.yearsOfExperience + '</td>' +
